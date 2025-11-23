@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">🎬 MovieApp</div>
+            <ul class="nav-links">
+               <li><a href="#home">Home</a></li>
+                <li><a href="#movies">Movies</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul> 
+            <div class="search-box">
+                <input type="text" placeholder="Search movies..." id="searchInput">
+                <button onclick="searchMovies()">Search</button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="hero-overlay">
+                <h1>Welcome to MovieApp</h1>
+                <p>Discover the magic of cinema</p>
+            </div>
+        </section>
+
+        <section class="about-section" id="about">
+            <h2>About Movies</h2>
+            <p>Discover the magic of cinema with our curated collection of timeless classics and modern masterpieces. From enchanting fairy tales to thrilling adventures, explore movies that have captivated audiences around the world. Each film tells a unique story that brings emotions, excitement, and inspiration to life.</p>
+        </section>
+
+        <section class="movie-cards" id="movies">
+
+        </section>
+    </main>
+
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Registration</h3>
+                <form class="registration-form">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <button type="submit">Register Now</button>
+                </form>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contact Information</h3>
+                <p>📧 Email: mamutovd70@gmail.com</p>
+                <p>📞 Phone: +996 (508) 013 927</p>
+                <p>📍 Address: Bishkek/Kyrgyzstan</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#home">Home</a>
+                <a href="#movies">Movies</a>
+                <a href="#about">About Us</a>
+                <a href="#contact">Contact</a>
+            </div>
+
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <p>Stay connected on social media</p>
+                <a href="https://t.me/@mamutov_d">Telegram</a>
+                <a href="https://github.com/mamutovd">Github</a>
+                <a href="https://instagram.com/_mamutovd_">Instagram</a>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 MovieApp. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

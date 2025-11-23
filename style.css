@@ -1,0 +1,713 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #0a0a0a;
+    color: #fff;
+    min-height: 100vh;
+}
+
+header {
+    background: rgba(15, 15, 15, 0.95);
+    padding: 2rem 4rem;
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1800px;
+    margin: 0 auto;
+}
+
+.logo {
+    font-size: 2.2rem;
+    font-weight: bold;
+    background: linear-gradient(45deg, #e50914, #ff6b6b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.nav-links {
+    display: flex;
+    gap: 3rem;
+    list-style: none;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: color 0.3s;
+    font-weight: 500;
+}
+
+.nav-links a:hover {
+    color: #e50914;
+}
+
+.search-box {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.search-box input {
+    padding: 0.8rem 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    outline: none;
+    width: 300px;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.search-box input:focus {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: #e50914;
+}
+
+.search-box input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.search-box button {
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 8px;
+    background: #e50914;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 1rem;
+}
+
+.search-box button:hover {
+    background: #ff0a16;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(229, 9, 20, 0.4);
+}
+
+
+.hero {
+    height: 90vh;
+    background-image: url('img/img1.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(10, 10, 10, 0.3), rgba(10, 10, 10, 0.9));
+}
+
+.hero-overlay {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.8);
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.hero p {
+    font-size: 1.8rem;
+    opacity: 0.9;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.about-section {
+    max-width: 1800px;
+    margin: 6rem auto;
+    padding: 0 4rem;
+}
+
+.about-section h2 {
+    font-size: 3.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: 700;
+}
+
+.about-section p {
+    font-size: 1.3rem;
+    line-height: 2;
+    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto 4rem;
+    opacity: 0.8;
+}
+
+.movie-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 0 4rem 6rem;
+}
+
+.card {
+    background: rgba(20, 20, 20, 0.8);
+    border-radius: 12px; /* чуть меньше скругление */
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    max-width: 400px; /* можно задать ширину карточки */
+    margin: 0 auto;
+}
+.card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(229, 9, 20, 0.3);
+    border-color: rgba(229, 9, 20, 0.3);
+}
+
+.card img {
+    width: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s;
+}
+
+.card:hover img {
+    transform: scale(1.05);
+}
+
+.card-content {
+    padding: 0.8rem 1rem; /* уменьшили внутренние отступы */
+}
+
+.card-title {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.card-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+}
+
+.year {
+    color: #888;
+    font-weight: 500;
+}
+
+.rating {
+    background: rgba(229, 9, 20, 0.2);
+    padding: 0.2rem 0.6rem; /* чуть меньше, чем было */
+    border-radius: 12px;    /* чуть меньше скругление */
+    color: #e50914;
+    font-weight: bold;
+    font-size: 0.85rem;     /* уменьшили размер шрифта */
+}
+
+
+
+footer {
+    background: rgba(15, 15, 15, 0.95);
+    padding: 4rem 4rem;
+    margin-top: 6rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-content {
+    max-width: 1800px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 4rem;
+}
+
+.footer-section h3 {
+    margin-bottom: 1.5rem;
+    color: #e50914;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.footer-section p,
+.footer-section a {
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 2.2;
+    text-decoration: none;
+    display: block;
+    font-size: 1.1rem;
+}
+
+.footer-section a:hover {
+    color: #e50914;
+}
+
+.registration-form input {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.2rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    font-size: 1rem;
+}
+
+.registration-form input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.registration-form button {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: 8px;
+    background: #e50914;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: all 0.3s;
+}
+
+.registration-form button:hover {
+    background: #ff0a16;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(229, 9, 20, 0.4);
+}
+
+.copyright {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    opacity: 0.6;
+    font-size: 1rem;
+}
+
+@media (min-width: 1920px) {
+    .movie-cards {
+        grid-template-columns: repeat(4, 1fr);
+        max-width: 2200px;
+    }
+}
+
+@media (min-width: 1440px) and (max-width: 1919px) {
+    .movie-cards {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1024px) and (max-width: 1439px) {
+    header {
+        padding: 1.5rem 3rem;
+    }
+    
+    nav {
+        max-width: 1400px;
+    }
+    
+    .logo {
+        font-size: 2rem;
+    }
+    
+    .nav-links {
+        gap: 2rem;
+    }
+    
+    .nav-links a {
+        font-size: 1rem;
+    }
+    
+    .search-box input {
+        width: 250px;
+    }
+    
+    .hero h1 {
+        font-size: 4rem;
+    }
+    
+    .hero p {
+        font-size: 1.5rem;
+    }
+    
+    .about-section {
+        margin: 5rem auto;
+        padding: 0 3rem;
+    }
+    
+    .about-section h2 {
+        font-size: 3rem;
+    }
+    
+    .about-section p {
+        font-size: 1.2rem;
+    }
+    
+    .movie-cards {
+        grid-template-columns: repeat(3, 1fr);
+        padding: 0 3rem 5rem;
+        gap: 1.5rem;
+    }
+    
+    footer {
+        padding: 3rem 3rem;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    header {
+        padding: 1.5rem 2rem;
+    }
+    
+    nav {
+        flex-wrap: wrap;
+        gap: 1.5rem;
+    }
+    
+    .logo {
+        font-size: 1.8rem;
+    }
+    
+    .nav-links {
+        gap: 1.5rem;
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        padding-top: 1rem;
+    }
+    
+    .nav-links a {
+        font-size: 0.95rem;
+    }
+    
+    .search-box {
+        order: 2;
+    }
+    
+    .search-box input {
+        width: 200px;
+        padding: 0.7rem 1.2rem;
+    }
+    
+    .search-box button {
+        padding: 0.7rem 1.5rem;
+    }
+    
+    .hero {
+        height: 70vh;
+    }
+    
+    .hero h1 {
+        font-size: 3.5rem;
+    }
+    
+    .hero p {
+        font-size: 1.3rem;
+    }
+    
+    .about-section {
+        margin: 4rem auto;
+        padding: 0 2rem;
+    }
+    
+    .about-section h2 {
+        font-size: 2.5rem;
+    }
+    
+    .about-section p {
+        font-size: 1.1rem;
+        line-height: 1.8;
+    }
+    
+    .movie-cards {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 0 2rem 4rem;
+        gap: 1.5rem;
+    }
+    
+    .card img {
+        height: 300px;
+    }
+    
+    .card-title {
+        font-size: 1.2rem;
+    }
+    
+    footer {
+        padding: 3rem 2rem;
+    }
+    
+    .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3rem;
+    }
+}
+
+@media (min-width: 480px) and (max-width: 767px) {
+    header {
+        padding: 1.2rem 1.5rem;
+    }
+    
+    nav {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .logo {
+        font-size: 1.6rem;
+    }
+    
+    .nav-links {
+        display: none;
+    }
+    
+    .search-box {
+        width: 100%;
+    }
+    
+    .search-box input {
+        flex: 1;
+        width: auto;
+        min-width: 0;
+    }
+    
+    .search-box button {
+        padding: 0.7rem 1.2rem;
+        font-size: 0.9rem;
+    }
+    
+    .hero {
+        height: 60vh;
+    }
+    
+    .hero h1 {
+        font-size: 2.5rem;
+        padding: 0 1rem;
+    }
+    
+    .hero p {
+        font-size: 1.1rem;
+        padding: 0 1rem;
+    }
+    
+    .about-section {
+        margin: 3rem auto;
+        padding: 0 1.5rem;
+    }
+    
+    .about-section h2 {
+        font-size: 2rem;
+    }
+    
+    .about-section p {
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+    
+    .movie-cards {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 0 1.5rem 3rem;
+        gap: 1rem;
+    }
+    
+    .card img {
+        height: 250px;
+    }
+    
+    .card-content {
+        padding: 1rem;
+    }
+    
+    .card-title {
+        font-size: 1rem;
+    }
+    
+    .card-info {
+        font-size: 0.85rem;
+    }
+    
+    .rating {
+        padding: 0.3rem 0.7rem;
+        font-size: 0.85rem;
+    }
+    
+    footer {
+        padding: 2.5rem 1.5rem;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+    
+    .footer-section h3 {
+        font-size: 1.3rem;
+    }
+    
+    .footer-section p,
+    .footer-section a {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 479px) {
+    header {
+        padding: 1rem;
+    }
+    
+    nav {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .logo {
+        font-size: 1.4rem;
+    }
+    
+    .nav-links {
+        display: none;
+    }
+    
+    .search-box {
+        width: 100%;
+        flex-direction: column;
+    }
+    
+    .search-box input {
+        width: 100%;
+        padding: 0.7rem 1rem;
+    }
+    
+    .search-box button {
+        width: 100%;
+        padding: 0.7rem;
+    }
+    
+    .hero {
+        height: 50vh;
+    }
+    
+    .hero h1 {
+        font-size: 1.8rem;
+        padding: 0 1rem;
+    }
+    
+    .hero p {
+        font-size: 0.95rem;
+        padding: 0 1rem;
+    }
+    
+    .about-section {
+        margin: 2.5rem auto;
+        padding: 0 1rem;
+    }
+    
+    .about-section h2 {
+        font-size: 1.6rem;
+    }
+    
+    .about-section p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+    
+    .movie-cards {
+        grid-template-columns: 1fr;
+        padding: 0 1rem 2.5rem;
+        gap: 1rem;
+    }
+    
+    .card img {
+        height: 280px;
+    }
+    
+    .card-content {
+        padding: 1rem;
+    }
+    
+    .card-title {
+        font-size: 1.1rem;
+    }
+    
+    .card-info {
+        font-size: 0.85rem;
+    }
+    
+    .rating {
+        padding: 0.3rem 0.7rem;
+    }
+    
+    footer {
+        padding: 2rem 1rem;
+        margin-top: 4rem;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .footer-section h3 {
+        font-size: 1.2rem;
+    }
+    
+    .footer-section p,
+    .footer-section a {
+        font-size: 0.95rem;
+        line-height: 2;
+    }
+    
+    .registration-form input {
+        padding: 0.8rem 1rem;
+        font-size: 0.95rem;
+    }
+    
+    .registration-form button {
+        padding: 0.8rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+    .hero {
+        height: 100vh;
+    }
+    
+    .hero h1 {
+        font-size: 2rem;
+    }
+    
+    .hero p {
+        font-size: 1rem;
+    }
+}
+
