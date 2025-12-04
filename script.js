@@ -19,14 +19,13 @@ document.querySelector('.registration-form').addEventListener('submit', function
     this.reset();
 });
 
-
-    // Скролл
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+// Скролл
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
                 behavior: 'smooth',
                 block: 'start'
             });
@@ -54,6 +53,17 @@ const movieList = [
 const movieContainer = document.getElementById("movies");
 movieContainer.innerHTML = "";
 
+// Модалка
+const modal = document.getElementById("movieModal");
+const modalPoster = document.getElementById("modalPoster");
+const modalTitle = document.getElementById("modalTitle");
+const modalDescription = document.getElementById("modalDescription");
+const modalActors = document.getElementById("modalActors");
+const modalGenre = document.getElementById("modalGenre");
+const modalRating = document.getElementById("modalRating");
+const closeModal = document.querySelector(".modal .close");
+
+// Создание карточек и добавление клика для модалки
 movieList.forEach(title => {
     fetch(`https://www.omdbapi.com/?t=${encodeURIComponent(title)}&apikey=${apiKey}`)
         .then(res => res.json())
@@ -72,9 +82,36 @@ movieList.forEach(title => {
                     </div>
                 `;
                 movieContainer.appendChild(card);
+
+                // ✅ Вешаем обработчик клика на модалку сразу после создания карточки
+                card.addEventListener("click", () => {
+                    modalPoster.src = data.Poster !== "N/A" ? data.Poster : "img/default.jpg";
+                    modalTitle.textContent = `${data.Title} (${data.Year})`;
+                    modalDescription.textContent = data.Plot;
+                    modalActors.textContent = data.Actors;
+                    modalGenre.textContent = data.Genre;
+                    modalRating.textContent = data.imdbRating;
+                    modal.style.display = "block";
+                });
             } else {
                 console.log(`Фильм "${title}" не найден в OMDb.`);
             }
         })
         .catch(err => console.error(err));
+});
+
+// Закрытие модалки
+closeModal.addEventListener("click", () => modal.style.display = "none");
+window.addEventListener("click", e => {
+    if(e.target === modal) modal.style.display = "none";
+});
+
+
+
+const burger = document.querySelector('.burger');
+const navLinks = document.querySelector('.nav-links');
+
+burger.addEventListener('click', () => {
+    navLinks.classList.toggle('show');
+    burger.classList.toggle('active');
 });
