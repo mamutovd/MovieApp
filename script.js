@@ -1,38 +1,3 @@
-function searchMovies() {
-    const searchTerm = document.getElementById('searchInput').value;
-    if (searchTerm.trim()) {
-        alert(`Searching for: ${searchTerm}`);
-    } else {
-        alert('Please enter a movie name to search');
-    }
-}
-
-document.getElementById('searchInput').addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
-        searchMovies();
-    }
-});
-
-document.querySelector('.registration-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    alert('Thank you for registering! We will contact you soon.');
-    this.reset();
-});
-
-// Скролл
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
-});
-
 const apiKey = "88fcaa75"; 
 const movieList = [
     "Beauty and the Beast",
@@ -51,7 +16,6 @@ const movieList = [
 ];
 
 const movieContainer = document.getElementById("movies");
-movieContainer.innerHTML = "";
 
 // Модалка
 const modal = document.getElementById("movieModal");
@@ -63,12 +27,31 @@ const modalGenre = document.getElementById("modalGenre");
 const modalRating = document.getElementById("modalRating");
 const closeModal = document.querySelector(".modal .close");
 
-// Создание карточек и добавление клика для модалки
-movieList.forEach(title => {
-    fetch(`https://www.omdbapi.com/?t=${encodeURIComponent(title)}&apikey=${apiKey}`)
+// 🔹 Функция поиска фильмов
+function searchMovies() {
+    const searchTerm = document.getElementById('searchInput').value.trim();
+    if (!searchTerm) return;
+
+    movieContainer.innerHTML = "";
+
+    fetch(`https://www.omdbapi.com/?s=${encodeURIComponent(searchTerm)}&apikey=${apiKey}`)
         .then(res => res.json())
         .then(data => {
-            if(data.Response === "True") {
+            if (data.Response === "True") {
+                data.Search.forEach(movie => loadMovieById(movie.imdbID));
+            } else {
+                movieContainer.innerHTML = `<p style="text-align:center; opacity:0.7;">Nothing found</p>`;
+            }
+        })
+        .catch(err => console.error(err));
+}
+
+// 🔹 Функция загрузки фильма по ID (для карточек и модалки)
+function loadMovieById(imdbID) {
+    fetch(`https://www.omdbapi.com/?i=${imdbID}&apikey=${apiKey}`)
+        .then(res => res.json())
+        .then(data => {
+            if (data.Response === "True") {
                 const card = document.createElement("div");
                 card.className = "card";
                 card.innerHTML = `
@@ -81,9 +64,7 @@ movieList.forEach(title => {
                         </div>
                     </div>
                 `;
-                movieContainer.appendChild(card);
 
-                // ✅ Вешаем обработчик клика на модалку сразу после создания карточки
                 card.addEventListener("click", () => {
                     modalPoster.src = data.Poster !== "N/A" ? data.Poster : "img/default.jpg";
                     modalTitle.textContent = `${data.Title} (${data.Year})`;
@@ -93,25 +74,59 @@ movieList.forEach(title => {
                     modalRating.textContent = data.imdbRating;
                     modal.style.display = "block";
                 });
-            } else {
-                console.log(`Фильм "${title}" не найден в OMDb.`);
+
+                movieContainer.appendChild(card);
             }
+        });
+}
+
+// 🔹 Показать дефолтные фильмы
+movieList.forEach(title => {
+    fetch(`https://www.omdbapi.com/?t=${encodeURIComponent(title)}&apikey=${apiKey}`)
+        .then(res => res.json())
+        .then(data => {
+            if(data.Response === "True") loadMovieById(data.imdbID);
         })
         .catch(err => console.error(err));
 });
 
-// Закрытие модалки
+// 🔹 Закрытие модалки
 closeModal.addEventListener("click", () => modal.style.display = "none");
 window.addEventListener("click", e => {
     if(e.target === modal) modal.style.display = "none";
 });
 
-
-
+// 🔹 Бургер меню
 const burger = document.querySelector('.burger');
 const navLinks = document.querySelector('.nav-links');
 
 burger.addEventListener('click', () => {
     navLinks.classList.toggle('show');
     burger.classList.toggle('active');
+});
+
+// 🔹 Поиск через ENTER
+document.getElementById('searchInput').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') searchMovies();
+});
+
+// 🔹 Форма регистрации
+document.querySelector('.registration-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert('Thank you for registering! We will contact you soon.');
+    this.reset();
+});
+
+// 🔹 Скролл по якорям
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
 });

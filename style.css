@@ -175,7 +175,7 @@ nav {
 
 .card {
     background: rgba(20, 20, 20, 0.8);
-    border-radius: 12px; /* чуть меньше скругление */
+    border-radius: 12px;
     overflow: hidden;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.05);
@@ -183,7 +183,9 @@ nav {
     cursor: pointer;
     display: flex;
     flex-direction: column;
-    max-width: 400px; /* можно задать ширину карточки */
+    width: 100%;
+    max-width: 300px; 
+    height: 480px;
     margin: 0 auto;
 }
 .card:hover {
@@ -194,6 +196,7 @@ nav {
 
 .card img {
     width: 100%;
+    height: 400px;
     object-fit: cover;
     display: block;
     transition: transform 0.4s;
@@ -205,6 +208,10 @@ nav {
 
 .card-content {
     padding: 0.8rem 1rem; /* уменьшили внутренние отступы */
+    flex: 1;           /* занимает оставшееся пространство карточки */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .card-title {
